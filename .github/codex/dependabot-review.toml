@@ -1,0 +1,13 @@
+[features]
+network_proxy = true
+
+[permissions.dependabot-review]
+extends = ":read-only"
+
+[permissions.dependabot-review.network]
+enabled = true
+
+# Upstream documentation hosts vary by package. Allow public destinations;
+# the proxy's default private-network restrictions still apply.
+[permissions.dependabot-review.network.domains]
+"*" = "allow"

@@ -1,0 +1,1824 @@
+/* Google Fonts must be imported first */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap');
+@import 'tailwindcss';
+@plugin 'tailwindcss-animate';
+
+/* ------------------------------------------------ */
+/* Satoshi Font Family (WOFF2)                      */
+/* ------------------------------------------------ */
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-LightItalic.woff2') format('woff2');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-Italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-MediumItalic.woff2') format('woff2');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-BoldItalic.woff2') format('woff2');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-Black.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-BlackItalic.woff2') format('woff2');
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* ------------------------------------------------ */
+/* Archivo Font Family (WOFF2, self-hosted)         */
+/* ------------------------------------------------ */
+
+@font-face {
+  font-family: 'Archivo';
+  src: url('/fonts/Archivo-Variable.woff2') format('woff2');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Archivo Black';
+  src: url('/fonts/ArchivoBlack-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Static theme values (fonts, primitive radius) */
+@theme {
+  --font-satoshi: 'Satoshi', system-ui, sans-serif;
+  --font-inter: 'Inter', system-ui, sans-serif;
+  --font-playfair: 'Playfair Display', Georgia, serif;
+  --font-archivo: 'Archivo', system-ui, sans-serif;
+  --font-archivo-black: 'Archivo Black', 'Archivo', system-ui, sans-serif;
+  /* Font-size tokens */
+  --text-micro: 0.625rem; /* 10px — micro-labels, badges, hit metadata */
+  /* Primitive radius tokens */
+  --radius-none: 0rem;
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-full: 9999px;
+}
+
+/* Dynamic theme values - resolved at runtime via CSS variables */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-highlight: var(--highlight);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --font-secondary: var(--font-secondary-family);
+  /* Semantic radius tokens - enable rounded-card, rounded-button, etc. */
+  --radius-card: var(--radius-card-base);
+  --radius-button: var(--radius-button-base);
+  --radius-input: var(--radius-input-base);
+  --radius-badge: var(--radius-badge-base);
+  --radius-image: var(--radius-image-base);
+}
+
+/* ------------------------------------------------ */
+/* Per-theme brand colors  */
+/* Used outside theme scope (e.g. DemoBar, Landing) via var(--theme-accent-*) */
+/* ------------------------------------------------ */
+
+:root {
+  --theme-accent-ecommerce: oklch(50% 0.15 295);
+  --theme-accent-electronics: oklch(56.4% 0.193 264.5);
+  --theme-accent-fashion: oklch(15% 0 0);
+  --theme-accent-travel: oklch(71% 0.1 75);
+  --theme-accent-b2b-content: oklch(50% 0.08 199);
+  --theme-accent-grocery: oklch(62% 0.23 130);
+  --theme-accent-furnishing: oklch(58% 0.13 40);
+  --theme-accent-b2b-warehouse: oklch(65.9% 0.144 54.3);
+  --theme-accent-media-entertainment: oklch(52% 0.259 263);
+
+  --theme-accent-aem-cruises: oklch(60% 0.13 220);
+  --theme-accent-aem-finance: oklch(51% 0.2 280);
+  --theme-accent-aem-cpg: oklch(67% 0.16 65);
+  --theme-accent-aem-healthcare: oklch(58% 0.2 10);
+  --theme-accent-aem-groceries: oklch(56% 0.11 175);
+}
+
+/* ------------------------------------------------ */
+/* Theme Variables (in @layer base for proper cascade) */
+/* ------------------------------------------------ */
+
+@layer base {
+  /* Prevent horizontal scroll from fixed elements */
+  html,
+  body {
+    overflow-x: hidden;
+  }
+
+  /* `hidden` makes body a scroll container, flashing a second scrollbar on media */
+  body:has(.theme-media-entertainment) {
+    overflow-x: clip;
+  }
+
+  /* Default Theme */
+  :root {
+    /* Layout */
+    --header-height: 73px;
+    --assistant-panel-width: 400px;
+    --article-body-font-size: 1rem;
+
+    --background: oklch(100% 0 0);
+    --foreground: oklch(15% 0 0);
+    --card: oklch(100% 0 0);
+    --card-foreground: oklch(15% 0 0);
+    --popover: oklch(100% 0 0);
+    --popover-foreground: oklch(15% 0 0);
+    --primary: oklch(22% 0 0);
+    --primary-foreground: oklch(99% 0 0);
+    --secondary: oklch(97% 0 0);
+    --secondary-foreground: oklch(22% 0 0);
+    --muted: oklch(97% 0 0);
+    --muted-foreground: oklch(55% 0 0);
+    --accent: oklch(97% 0 0);
+    --accent-foreground: oklch(22% 0 0);
+    --highlight: oklch(97% 0 0 / 30%);
+    --destructive: oklch(63% 0.24 29);
+    --destructive-foreground: oklch(99% 0 0);
+    --success: oklch(82% 0.12 142);
+    --success-foreground: oklch(22% 0 0);
+    --warning: oklch(67% 0.18 58);
+    --border: oklch(92% 0 0);
+    --input: oklch(92% 0 0);
+    --ring: oklch(15% 0 0);
+    /* Semantic radius - default values */
+    --radius-card-base: 0.5rem;
+    --radius-button-base: 0.375rem;
+    --radius-input-base: 0.375rem;
+    --radius-badge-base: 9999px;
+    --radius-image-base: 0.25rem;
+    --radius-searchbox-base: 1rem;
+  }
+
+  /* Theme Ecommerce - Purple accent, rounded corners */
+  .theme-ecommerce {
+    font-family: 'Satoshi', system-ui, sans-serif;
+    --primary: oklch(22% 0 0);
+    --primary-foreground: oklch(99% 0 0);
+    --secondary: oklch(97% 0 0);
+    --secondary-foreground: oklch(22% 0 0);
+    --accent: oklch(50% 0.15 295);
+    --accent-foreground: oklch(99% 0 0);
+    --highlight: oklch(50% 0.15 295 / 25%);
+    --muted: oklch(97% 0 0);
+    --muted-foreground: oklch(55% 0 0);
+    --border: oklch(92% 0 0);
+    --card: oklch(100% 0 0);
+    --card-foreground: oklch(22% 0 0);
+    /* Semantic radius - ecommerce (rounded, friendly) */
+    --radius-card-base: 0.5rem;
+    --radius-button-base: 0.5rem;
+    --radius-input-base: 0.375rem;
+    --radius-badge-base: 9999px;
+    --radius-image-base: 0.25rem;
+    --radius-searchbox-base: 1rem;
+  }
+
+  /* Theme Fashion - Minimal black & white palette, sharp corners */
+  .theme-fashion {
+    font-family: 'Inter', system-ui, sans-serif;
+    --font-secondary-family: var(--font-playfair);
+    --header-height: 89px;
+    --article-body-font-size: 1rem;
+    --primary: oklch(15% 0 0);
+    --primary-foreground: oklch(98% 0 0);
+    --secondary: oklch(96% 0 0);
+    --secondary-foreground: oklch(15% 0 0);
+    --accent: oklch(15% 0 0);
+    --accent-foreground: oklch(98% 0 0);
+    --highlight: oklch(15% 0 0 / 12%);
+    --muted: oklch(96% 0 0);
+    --muted-foreground: oklch(45% 0 0);
+    --border: oklch(94% 0 0);
+    --card: oklch(98% 0 0);
+    --card-foreground: oklch(15% 0 0);
+    /* Semantic radius - fashion (sharp, minimal) */
+    --radius-card-base: 0rem;
+    --radius-button-base: 0rem;
+    --radius-input-base: 0rem;
+    --radius-badge-base: 0rem;
+    --radius-image-base: 0rem;
+    --radius-searchbox-base: 0rem;
+  }
+
+  /* Theme Travel - Warm gold accent, Satoshi Light */
+  .theme-travel {
+    font-family: 'Satoshi', system-ui, sans-serif;
+    font-weight: 300;
+    --article-body-font-size: 1.125rem;
+    --primary: oklch(28% 0.02 60);
+    --primary-foreground: oklch(99% 0 0);
+    --secondary: oklch(97% 0.01 75);
+    --secondary-foreground: oklch(28% 0.02 60);
+    --accent: oklch(71% 0.1 75);
+    --accent-foreground: oklch(99% 0 0);
+    --highlight: oklch(71% 0.1 75 / 20%);
+    --muted: oklch(97% 0.01 75);
+    --muted-foreground: oklch(52% 0.02 60);
+    --border: oklch(91% 0.01 75);
+    --card: oklch(100% 0 0);
+    --card-foreground: oklch(28% 0.02 60);
+    /* Semantic radius - travel (soft, friendly) */
+    --radius-card-base: 0.75rem;
+    --radius-button-base: 0.5rem;
+    --radius-input-base: 0.5rem;
+    --radius-badge-base: 9999px;
+    --radius-image-base: 0.5rem;
+    --radius-searchbox-base: 1rem;
+  }
+
+  /* Theme B2B - Clear blue accent, balanced radius */
+  .theme-b2b-content {
+    font-family: 'Satoshi', system-ui, sans-serif;
+    --article-body-font-size: 1rem;
+    --primary: oklch(50% 0.08 199);
+    --primary-foreground: oklch(99% 0 0);
+    --secondary: oklch(97% 0.02 199);
+    --secondary-foreground: oklch(30% 0.06 199);
+    --accent: oklch(55% 0.1 199);
+    --accent-foreground: oklch(99% 0 0);
+    --highlight: oklch(55% 0.1 199 / 18%);
+    --muted: oklch(97% 0.02 199);
+    --muted-foreground: oklch(45% 0.05 199);
+    --border: oklch(92% 0 0);
+    --card: oklch(100% 0 0);
+    --card-foreground: oklch(28% 0.05 199);
+    /* Semantic radius - b2b (clean and structured) */
+    --radius-card-base: 0.75rem;
+    --radius-button-base: 0.5rem;
+    --radius-input-base: 0.5rem;
+    --radius-badge-base: 9999px;
+    --radius-image-base: 0.5rem;
+    --radius-searchbox-base: 1rem;
+    /* Hero gradient vars — consumed via var() in inline styles (B2BContentHeroBanner) */
+    --color-b2b-content-hero-bg-from: oklch(12% 0.06 199);
+    --color-b2b-content-hero-bg-mid: oklch(20% 0.1 220);
+    --color-b2b-content-hero-bg-to: oklch(14% 0.07 199);
+    --color-b2b-content-hero-grid-line: oklch(80% 0.05 199 / 1);
+    --color-b2b-content-hero-glow: oklch(65% 0.18 199);
+    --color-b2b-content-hero-gradient-from: oklch(70% 0.15 199);
+    --color-b2b-content-hero-gradient-to: oklch(80% 0.12 220);
+  }
+
+  /* Theme Electronics - Light palette, blue accent (#3A6BE5), crisp corners */
+  .theme-electronics {
+    font-family: 'Satoshi', system-ui, sans-serif;
+    --foreground: oklch(22% 0.02 240);
+    --card: oklch(100% 0 0);
+    --card-foreground: oklch(22% 0.02 240);
+    --popover-foreground: oklch(22% 0.02 240);
+    --primary: oklch(25% 0.03 240);
+    --primary-foreground: oklch(99% 0 0);
+    --secondary: oklch(96% 0.01 240);
+    --secondary-foreground: oklch(25% 0.03 240);
+    --muted: oklch(96% 0.01 240);
+    --muted-foreground: oklch(50% 0.02 240);
+    --accent: oklch(56.4% 0.193 264.5);
+    --accent-foreground: oklch(99% 0 0);
+    --highlight: oklch(56.4% 0.193 264.5 / 18%);
+    --success: oklch(72% 0.16 155);
+    --success-foreground: oklch(99% 0 0);
+    --border: oklch(92% 0.005 240);
+    --ring: oklch(56.4% 0.193 264.5);
+    /* Semantic radius - electronics (modern, crisp) */
+    --radius-card-base: 0.5rem;
+    --radius-button-base: 0.375rem;
+    --radius-input-base: 0.375rem;
+    --radius-badge-base: 9999px;
+    --radius-image-base: 0.375rem;
+    --radius-searchbox-base: 0.75rem;
+  }
+
+  /* Theme Grocery - Fresh green accent (#5B9A3C), earthy tones, soft corners */
+  .theme-grocery {
+    font-family: 'Satoshi', system-ui, sans-serif;
+    --primary: oklch(25% 0.04 130);
+    --primary-foreground: oklch(99% 0 0);
+    --secondary: oklch(97% 0.02 130);
+    --secondary-foreground: oklch(25% 0.04 130);
+    --accent: oklch(62% 0.23 130);
+    --accent-foreground: oklch(99% 0 0);
+    --highlight: oklch(62% 0.23 130 / 20%);
+    --muted: oklch(97% 0.01 130);
+    --muted-foreground: oklch(50% 0.03 130);
+    --border: oklch(92% 0.01 130);
+    --card: oklch(100% 0 0);
+    --card-foreground: oklch(25% 0.04 130);
+    --success: oklch(62% 0.23 130);
+    --success-foreground: oklch(99% 0 0);
+    /* Semantic radius - grocery (soft, approachable) */
+    --radius-card-base: 0.75rem;
+    --radius-button-base: 2rem;
+    --radius-input-base: 2rem;
+    --radius-badge-base: 9999px;
+    --radius-image-base: 0.5rem;
+    --radius-searchbox-base: 2rem;
+  }
+
+  /* Theme Furnishing - Warm terracotta accent, clean and structured */
+  .theme-furnishing {
+    font-family: 'Inter', system-ui, sans-serif;
+    --header-height: 89px;
+    --primary: oklch(58% 0.13 40);
+    --primary-foreground: oklch(98% 0.008 80);
+    --secondary: oklch(96% 0.01 80);
+    --secondary-foreground: oklch(20% 0.02 60);
+    --accent: oklch(58% 0.13 40);
+    --accent-foreground: oklch(98% 0.008 80);
+    --highlight: oklch(58% 0.13 40 / 12%);
+    --muted: oklch(96% 0.01 80);
+    --muted-foreground: oklch(45% 0.02 60);
+    --border: oklch(92% 0.01 80);
+    --card: oklch(99% 0.005 80);
+    --card-foreground: oklch(20% 0.02 60);
+    --foreground: oklch(20% 0.02 60);
+    --radius-card-base: 0.5rem;
+    --radius-button-base: 0.375rem;
+    --radius-input-base: 0.375rem;
+    --radius-badge-base: 0.375rem;
+    --radius-image-base: 0.375rem;
+    --radius-searchbox-base: 0.375rem;
+  }
+
+  /* Theme B2B Warehouse - Burnt-orange accent, industrial steel neutrals, crisp corners */
+  .theme-b2b-warehouse {
+    font-family: 'Inter', system-ui, sans-serif;
+    --foreground: oklch(24% 0.01 250);
+    --card: oklch(100% 0 0);
+    --card-foreground: oklch(24% 0.01 250);
+    --popover-foreground: oklch(24% 0.01 250);
+    --primary: oklch(28% 0.02 250);
+    --primary-foreground: oklch(99% 0 0);
+    --secondary: oklch(96% 0.005 250);
+    --secondary-foreground: oklch(28% 0.02 250);
+    --muted: oklch(96% 0.005 250);
+    --muted-foreground: oklch(48% 0.01 250);
+    --accent: oklch(65.9% 0.144 54.3);
+    --accent-foreground: oklch(99% 0 0);
+    --highlight: oklch(65.9% 0.144 54.3 / 18%);
+    --success: oklch(72% 0.16 155);
+    --success-foreground: oklch(99% 0 0);
+    --border: oklch(91% 0.005 250);
+    --ring: oklch(65.9% 0.144 54.3);
+    /* Semantic radius - b2b-warehouse (utilitarian, crisp) */
+    --radius-card-base: 0.5rem;
+    --radius-button-base: 0.375rem;
+    --radius-input-base: 0.375rem;
+    --radius-badge-base: 0.375rem;
+    --radius-image-base: 0.375rem;
+    --radius-searchbox-base: 0.375rem;
+  }
+
+  /* Theme Media & Entertainment - Cinematic dark, Algolia-blue accent */
+  .theme-media-entertainment {
+    font-family: var(--font-archivo);
+    --font-secondary-family: var(--font-archivo-black);
+    --header-height: 88px;
+    --background: oklch(16% 0 0);
+    --foreground: oklch(97% 0 0);
+    --card: oklch(22% 0 0);
+    --card-foreground: oklch(97% 0 0);
+    --popover: oklch(20% 0 0);
+    --popover-foreground: oklch(97% 0 0);
+    --primary: oklch(97% 0 0);
+    --primary-foreground: oklch(16% 0 0);
+    --secondary: oklch(28% 0 0);
+    --secondary-foreground: oklch(97% 0 0);
+    --muted: oklch(26% 0 0);
+    --muted-foreground: oklch(72% 0 0);
+    --accent: oklch(52% 0.259 263);
+    --accent-foreground: oklch(99% 0 0);
+    --highlight: oklch(62% 0.22 263 / 40%);
+    --destructive: oklch(63% 0.24 29);
+    --destructive-foreground: oklch(99% 0 0);
+    --success: oklch(72% 0.15 145);
+    --success-foreground: oklch(16% 0 0);
+    --border: oklch(30% 0 0);
+    --input: oklch(30% 0 0);
+    --ring: oklch(52% 0.259 263);
+    /* Semantic radius - media (square, cinematic) */
+    --radius-card-base: 0.25rem;
+    --radius-button-base: 0.25rem;
+    --radius-input-base: 0.25rem;
+    --radius-badge-base: 0.25rem;
+    --radius-image-base: 0.25rem;
+    --radius-searchbox-base: 0.25rem;
+  }
+
+  @media (min-width: 768px) {
+    .theme-fashion {
+      --article-body-font-size: 1.0625rem;
+    }
+
+    .theme-travel {
+      --article-body-font-size: 1.15rem;
+    }
+
+    .theme-b2b-content {
+      --article-body-font-size: 1.125rem;
+    }
+  }
+
+  /* Media header collapses below md - keeps --header-height truthful */
+  @media (max-width: 767px) {
+    .theme-media-entertainment {
+      --header-height: 56px;
+    }
+  }
+}
+
+/* ------------------------------------------------ */
+/* Base Utilities                                   */
+/* ------------------------------------------------ */
+
+/* Hide the native scrollbar on horizontally scrolled rails and carousels */
+@utility scrollbar-none {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/*
+ * Slim scrollbar for rails that keep a visible scroll hint — the native bar is
+ * far too heavy inside a narrow panel. Tokens, not `--color-*`: the latter is
+ * declared on `:root` by `@theme inline`, so it never picks up the theme class.
+ */
+@utility scrollbar-slim {
+  scrollbar-width: thin;
+  scrollbar-color: color-mix(in srgb, var(--foreground) 22%, transparent)
+    transparent;
+
+  &::-webkit-scrollbar {
+    height: 4px;
+    width: 4px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: color-mix(in srgb, var(--foreground) 22%, transparent);
+    border-radius: var(--radius-full);
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: color-mix(in srgb, var(--foreground) 38%, transparent);
+  }
+}
+
+/* ------------------------------------------------ */
+/* Autocomplete Widget Overrides                    */
+/* ------------------------------------------------ */
+
+/* Input and panel width */
+.ais-Autocomplete {
+  width: 100%;
+  max-width: 800px;
+}
+
+.ais-Autocomplete-panel {
+  width: 700px;
+  max-width: 90vw;
+}
+
+.ais-AutocompletePanelLayout {
+  width: 100%;
+}
+
+/* Result item background and padding reset */
+.ais-AutocompleteIndexItem {
+  background: transparent !important;
+  padding: 0 !important;
+}
+
+.ais-AutocompleteIndexNoResults {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Result item hover and selected state */
+.ais-AutocompleteIndexItem:hover,
+.ais-AutocompleteIndexItem[aria-selected='true'] {
+  background: var(--color-muted) !important;
+}
+
+/* Search icon color */
+.ais-AutocompleteSubmitIcon,
+.ais-AutocompleteSubmitButtonIcon,
+.ais-AutocompleteDetachedSearchIcon,
+.ais-AutocompleteDetachedSearchButtonIcon,
+.ais-AutocompleteBackIcon {
+  color: var(--primary) !important;
+}
+
+/* Detached search button icon: reduce satellite's default left padding */
+.ais-AutocompleteDetachedSearchButtonIcon {
+  padding-left: 4px !important;
+}
+
+/* Hide loading indicator */
+.ais-AutocompleteLoadingIndicator {
+  display: none !important;
+}
+
+/* Detached overlay submit button */
+.ais-AutocompleteDetachedOverlay .ais-AutocompleteSubmitButton {
+  padding-left: 8px !important;
+  padding-right: 8px !important;
+  width: auto !important;
+}
+
+/* Detached overlay placeholder: hidden on ≤640px */
+@media (max-width: 640px) {
+  .ais-AutocompleteDetachedOverlay .ais-AutocompleteInput::placeholder {
+    color: transparent !important;
+  }
+}
+
+/* Input border and radius - consistent with buttons/cards */
+.ais-Autocomplete .ais-AutocompleteForm,
+.ais-AutocompleteDetachedSearchButton {
+  position: relative;
+  z-index: 1; /* Creates stacking context so AI button z-index is scoped to form */
+  background-color: var(--color-muted) !important;
+  border: 1px solid var(--color-border) !important;
+  border-radius: var(--radius-searchbox-base) !important;
+  height: 44px !important;
+  padding: 0 4px !important;
+  padding-right: 100px !important; /* Space for AI button */
+  transition: all 200ms ease;
+  /* Button element resets to match form appearance */
+  width: 100% !important;
+  text-align: left !important;
+  cursor: text !important;
+  display: flex !important;
+  align-items: center !important;
+  box-sizing: border-box !important;
+  font-family: inherit !important;
+  font-size: inherit !important;
+  color: var(--color-muted-foreground) !important;
+}
+
+/* AI Mode Button inside SearchBox */
+.ais-Autocomplete .aa-AIButton,
+.ais-AutocompleteForm .aa-AIButton,
+button.aa-AIButton[type='button'] {
+  /* Reset button defaults without using all:unset */
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+  position: absolute !important;
+  right: 8px !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  z-index: 10 !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  padding: 6px 12px !important;
+  font-family: inherit !important;
+  font-size: 0.875rem !important;
+  font-weight: 500 !important;
+  line-height: 1 !important;
+  color: var(--foreground, #000) !important;
+  background: transparent !important;
+  border-style: solid !important;
+  border-width: 1px !important;
+  border-color: var(--accent, #6366f1) !important;
+  border-radius: var(--radius-button-base, 0.375rem) !important;
+  cursor: pointer !important;
+  transition: all 200ms ease !important;
+}
+
+/* AI mode button: hover state */
+.ais-Autocomplete .aa-AIButton:hover,
+.ais-AutocompleteForm .aa-AIButton:hover,
+button.aa-AIButton[type='button']:hover {
+  background: var(--accent, #6366f1) !important;
+  color: #fff !important;
+  border-color: var(--accent, #6366f1) !important;
+}
+
+/* AI mode button: icon color */
+.ais-Autocomplete .aa-AIButton svg,
+.ais-AutocompleteForm .aa-AIButton svg,
+button.aa-AIButton[type='button'] svg {
+  width: 14px !important;
+  height: 14px !important;
+  flex-shrink: 0 !important;
+  color: var(--accent, #6366f1) !important;
+  stroke: var(--accent, #6366f1) !important;
+  transition: all 200ms ease !important;
+}
+
+/* AI mode button: icon color on hover */
+.ais-Autocomplete .aa-AIButton:hover svg,
+.ais-AutocompleteForm .aa-AIButton:hover svg,
+button.aa-AIButton[type='button']:hover svg {
+  color: #fff !important;
+  stroke: #fff !important;
+}
+
+/* AI mode button: prevent label text wrapping */
+.ais-Autocomplete .aa-AIButton span,
+.ais-AutocompleteForm .aa-AIButton span,
+button.aa-AIButton[type='button'] span {
+  white-space: nowrap !important;
+}
+
+/* Disabled state */
+.ais-Autocomplete .aa-AIButton--disabled,
+.ais-AutocompleteForm .aa-AIButton--disabled,
+button.aa-AIButton[type='button'].aa-AIButton--disabled {
+  opacity: 0.4 !important;
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+}
+
+/* Input focus state */
+.ais-Autocomplete .ais-AutocompleteForm:focus-within,
+.ais-AutocompleteDetachedOverlay .ais-AutocompleteForm:focus-within,
+.ais-AutocompleteDetachedSearchButton:focus {
+  background-color: hsl(0 0% 100%);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-accent) 15%, transparent);
+  border-color: color-mix(in srgb, var(--color-accent) 30%, transparent);
+}
+
+/* Fashion theme: bottom-border-only searchbox */
+.theme-fashion .ais-Autocomplete .ais-AutocompleteForm,
+.theme-fashion .ais-AutocompleteDetachedSearchButton {
+  background-color: transparent !important;
+  border: none !important;
+  border-bottom: 1px solid var(--color-border) !important;
+  border-radius: 0 !important;
+  height: 40px !important;
+}
+
+.theme-fashion .ais-Autocomplete .ais-AutocompleteInput,
+.theme-fashion .ais-AutocompleteDetachedSearchButton {
+  font-size: 0.85rem !important;
+}
+
+.theme-fashion .ais-Autocomplete .ais-AutocompleteForm:focus-within,
+.theme-fashion .ais-AutocompleteDetachedSearchButton:focus {
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border-bottom: 1px solid var(--color-foreground) !important;
+}
+
+.theme-fashion .ais-Autocomplete .aa-AIButton,
+.theme-fashion .ais-AutocompleteForm .aa-AIButton,
+.theme-fashion button.aa-AIButton[type='button'] {
+  border-width: 1px !important;
+  border-color: var(--color-border) !important;
+  border-radius: 0 !important;
+  padding: 6px 10px !important;
+  text-transform: uppercase !important;
+  font-size: 0.75rem !important;
+  letter-spacing: 0.05em !important;
+}
+
+.theme-fashion .ais-Autocomplete .aa-AIButton:hover,
+.theme-fashion .ais-AutocompleteForm .aa-AIButton:hover,
+.theme-fashion button.aa-AIButton[type='button']:hover {
+  background: var(--color-foreground) !important;
+  border-color: var(--color-foreground) !important;
+}
+
+.theme-fashion .ais-Autocomplete-panel,
+.theme-fashion .ais-AutocompletePanel {
+  border-radius: 0 !important;
+  box-shadow: 0 4px 20px -4px rgba(0, 0, 0, 0.1) !important;
+}
+
+@media (min-width: 1024px) {
+  .theme-fashion .ais-AutocompletePanel {
+    left: 50%;
+    width: 100%;
+    max-width: 90vw;
+    translate: -50% 0;
+  }
+
+  .theme-fashion
+    .ais-AutocompletePanel:has(
+      [data-slot='autocomplete-discovery'] .ais-AutocompleteIndexItem
+    ) {
+    width: min(800px, 90vw);
+  }
+}
+
+.theme-fashion .ais-AutocompleteIndexItem {
+  border-radius: 0 !important;
+}
+
+.theme-fashion .ais-AutocompleteIndexItem[aria-selected='true'] {
+  background-color: var(--color-muted) !important;
+}
+
+@media (hover: hover) {
+  .theme-fashion .ais-AutocompleteIndexItem:hover {
+    background-color: var(--color-muted) !important;
+  }
+}
+
+/* Media & Entertainment - dark autocomplete surfaces */
+.theme-media-entertainment .ais-Autocomplete .ais-AutocompleteForm,
+.theme-media-entertainment .ais-AutocompleteDetachedSearchButton {
+  background-color: var(--color-card) !important;
+  border: 1px solid var(--color-border) !important;
+}
+
+.theme-media-entertainment .ais-Autocomplete .ais-AutocompleteInput {
+  color: var(--color-foreground) !important;
+}
+
+.theme-media-entertainment .ais-Autocomplete .ais-AutocompleteForm:focus-within,
+.theme-media-entertainment .ais-AutocompleteDetachedSearchButton:focus {
+  border-color: var(--color-accent) !important;
+  box-shadow: none !important;
+}
+
+.theme-media-entertainment .ais-Autocomplete-panel,
+.theme-media-entertainment .ais-AutocompletePanel {
+  background: var(--color-popover) !important;
+  border: 1px solid var(--color-border) !important;
+}
+
+.theme-media-entertainment .ais-AutocompleteIndexItem[aria-selected='true'] {
+  background-color: var(--color-muted) !important;
+}
+
+@media (hover: hover) {
+  .theme-media-entertainment .ais-AutocompleteIndexItem:hover {
+    background-color: var(--color-muted) !important;
+  }
+}
+
+/*
+ * Media & Entertainment - AI Mode pill.
+ *
+ * The shared button's tokens already resolve correctly on the dark theme; a bare
+ * outline just disappears against the near-black field, so it rests on a tinted
+ * fill. Unlayered on purpose — that beats the component's Tailwind utilities,
+ * including the hover fill, which is re-stated below.
+ *
+ * Use `--accent`, not `--color-accent`: `@theme inline` declares the latter on
+ * `:root` as `var(--accent)`, so it substitutes at root scope and resolves to
+ * the light default, never this theme's blue.
+ */
+.theme-media-entertainment .ai-mode-button {
+  background-color: color-mix(in srgb, var(--accent) 14%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+}
+
+/* Hover fills solid accent, then falls back to the resting tint. */
+@media (hover: hover) {
+  .theme-media-entertainment .ai-mode-button:hover {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    box-shadow: none;
+  }
+}
+
+/* Dropdown panel */
+.ais-Autocomplete-panel {
+  background: var(--color-popover);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-searchbox-base);
+  box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.15);
+  margin-top: 8px;
+  padding: 16px;
+  animation: slideDown 150ms ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ------------------------------------------------ */
+/* Chat Widget Overrides                            */
+/* ------------------------------------------------ */
+
+/* Satellite's 9998 would cover the DemoBar and its options popover. */
+:root {
+  --ais-z-index-chat: 55 !important;
+}
+
+/*
+ * The official InstantSearch Chat keeps its interaction, streaming and tool
+ * behavior, while these tokens and element overrides let it inherit the
+ * application design system instead of looking like a separate product.
+ */
+.sw-ChatWidget {
+  --ais-chat-width: var(--assistant-panel-width, 400px);
+  --ais-chat-maximized-width: 100%;
+  --ais-chat-height: 100%;
+  --ais-chat-maximized-height: 100%;
+  --ais-chat-margin: 0;
+  --ais-border-radius-lg: 0;
+  --ais-border-radius-md: var(--radius-card-base, 0.75rem);
+  --ais-border-radius-sm: var(--radius-input-base, 0.5rem);
+  --ais-font-size: 0.875rem;
+  --ais-transition-duration: 0.3s;
+  font-family: var(--font-secondary-family, inherit);
+}
+
+/* Fashion chat uses the body font, including inside response content. */
+.theme-fashion .sw-ChatWidget,
+.theme-fashion .sw-ChatWidget .ais-ChatMessage-message {
+  font-family: var(--font-inter);
+}
+
+/* Media chat uses regular Archivo instead of its display face. */
+.theme-media-entertainment .sw-ChatWidget {
+  font-family: inherit;
+}
+
+/* The docked panel starts below the app header, then claims the full viewport
+ * as soon as the underlying page scrolls and the header is no longer useful. */
+.sw-ChatWidget--side-panel.ais-ChatOverlayLayout {
+  top: var(--header-height);
+  right: 0;
+  bottom: auto;
+  height: calc(100dvh - var(--header-height));
+}
+
+.sw-ChatWidget--side-panel.sw-ChatWidget--scrolled.ais-ChatOverlayLayout {
+  top: 0;
+  height: 100dvh;
+}
+
+/* Homepage and map launches use the app's full-screen assistant treatment. */
+.sw-ChatWidget.ais-ChatOverlayLayout {
+  transition:
+    top var(--ais-transition-duration) var(--ais-transition-timing-function),
+    width var(--ais-transition-duration) var(--ais-transition-timing-function),
+    height var(--ais-transition-duration) var(--ais-transition-timing-function);
+}
+
+.sw-ChatWidget--fullscreen.ais-ChatOverlayLayout {
+  inset: 0;
+  width: 100%;
+  height: 100dvh;
+  max-width: none;
+  max-height: none;
+  /* Same stacking level as the custom expanded assistant: its controls must
+   * remain usable while the DemoBar is present. */
+  z-index: 10001;
+}
+
+/* Keep the right edge fixed while maximizing, so the panel grows from right
+ * to left instead of jumping into a full-screen layout. */
+.sw-ChatWidget--expanded.ais-ChatOverlayLayout {
+  top: 0;
+  right: 0;
+  bottom: auto;
+  left: auto;
+  width: 100%;
+  height: 100dvh;
+  max-width: none;
+  max-height: none;
+  z-index: 10001;
+}
+
+.sw-ChatWidget--fullscreen,
+.sw-ChatWidget--expanded,
+.sw-ChatWidget.ais-ChatOverlayLayout--maximized {
+  /* Tailwind's `container` resolves to 80rem at its widest breakpoint — the
+   * same centered column the custom expanded assistant uses. */
+  --sw-chat-content-width: 80rem;
+  --sw-chat-content-gutter: max(
+    1rem,
+    calc((100vw - var(--sw-chat-content-width)) / 2)
+  );
+}
+
+.sw-ChatWidget .ais-Chat-container {
+  background: var(--background);
+  color: var(--foreground);
+  border: 0;
+  border-left: 1px solid var(--border);
+  /* Satellite gives the open overlay an outline-like shadow; the side panel
+   * owns one divider instead. */
+  box-shadow: none !important;
+}
+
+.sw-ChatWidget--fullscreen .ais-Chat-container,
+.sw-ChatWidget--expanded .ais-Chat-container,
+.sw-ChatWidget.ais-ChatOverlayLayout--maximized .ais-Chat-container {
+  border-left: 0;
+}
+
+/* Match the custom expanded assistant: one white full-page surface, with
+ * centered content and generous white gutters instead of an inset panel. */
+.sw-ChatWidget--fullscreen .ais-ChatHeader,
+.sw-ChatWidget--expanded .ais-ChatHeader,
+.sw-ChatWidget.ais-ChatOverlayLayout--maximized .ais-ChatHeader {
+  padding-inline: var(--sw-chat-content-gutter) !important;
+}
+
+.sw-ChatWidget--fullscreen .ais-ChatMessages-scroll,
+.sw-ChatWidget--expanded .ais-ChatMessages-scroll,
+.sw-ChatWidget.ais-ChatOverlayLayout--maximized .ais-ChatMessages-scroll {
+  padding-inline: var(--sw-chat-content-gutter) !important;
+}
+
+.sw-ChatWidget--fullscreen .ais-ChatMessages-content,
+.sw-ChatWidget--expanded .ais-ChatMessages-content,
+.sw-ChatWidget.ais-ChatOverlayLayout--maximized .ais-ChatMessages-content {
+  width: 100%;
+  max-width: var(--sw-chat-content-width);
+  margin-inline: auto;
+}
+
+.sw-ChatWidget--fullscreen .sw-ChatWidget-prompt,
+.sw-ChatWidget--expanded .sw-ChatWidget-prompt,
+.sw-ChatWidget.ais-ChatOverlayLayout--maximized .sw-ChatWidget-prompt {
+  /* The prompt owns the full-width divider; its contents retain the same
+   * centered gutter as the header and conversation. */
+  align-self: center;
+  width: 100vw;
+  max-width: 100vw;
+  margin-inline: 0;
+  padding-inline: var(--sw-chat-content-gutter) !important;
+}
+
+.sw-ChatWidget .ais-ChatHeader {
+  min-height: 57px;
+  padding: 0.75rem 1rem;
+  color: var(--foreground);
+  border-color: var(--border);
+}
+
+.sw-ChatWidget .ais-ChatHeader::after,
+.sw-ChatWidget .ais-ChatPrompt::before {
+  background: none;
+}
+
+.sw-ChatWidget .ais-ChatHeader-title {
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+.sw-ChatWidget .ais-ChatHeader-actions button {
+  color: var(--muted-foreground);
+}
+
+@media (hover: hover) {
+  .sw-ChatWidget .ais-ChatHeader-actions button:hover {
+    color: var(--foreground);
+  }
+}
+
+.sw-ChatWidget .ais-ChatHeader-titleIcon {
+  display: none;
+  color: var(--primary);
+}
+
+.sw-ChatWidget--fullscreen .ais-ChatHeader-titleIcon,
+.sw-ChatWidget--expanded .ais-ChatHeader-titleIcon,
+.sw-ChatWidget.ais-ChatOverlayLayout--maximized .ais-ChatHeader-titleIcon {
+  display: inline-flex;
+  width: 1rem;
+  height: 1rem;
+  flex: 0 0 1rem;
+}
+
+.sw-ChatWidget--fullscreen .ais-ChatHeader-titleIcon svg,
+.sw-ChatWidget--expanded .ais-ChatHeader-titleIcon svg,
+.sw-ChatWidget.ais-ChatOverlayLayout--maximized .ais-ChatHeader-titleIcon svg {
+  width: 1rem !important;
+  height: 1rem !important;
+}
+
+.sw-ChatWidget .ais-ChatMessages-scroll {
+  padding: 1rem;
+}
+
+/* Same gap as `.ais-ChatMessages-content`, so the loader sits where the sent turn's will. */
+.sw-ChatWidget-queuedTurn {
+  display: grid;
+  gap: calc(var(--ais-spacing) * 1.5);
+}
+
+/* The product card belongs in the transcript, directly above the first user
+ * turn. Keep the compact side panel focused on the conversation itself. */
+.sw-ChatWidget-productContext {
+  display: none;
+}
+
+.sw-ChatWidget--fullscreen .sw-ChatWidget-productContext,
+.sw-ChatWidget--expanded .sw-ChatWidget-productContext,
+.sw-ChatWidget.ais-ChatOverlayLayout--maximized .sw-ChatWidget-productContext {
+  display: block;
+}
+
+.sw-ChatWidget--fullscreen
+  .ais-ChatMessage:first-child:has(.sw-ChatWidget-productContext)
+  .ais-ChatMessage-container,
+.sw-ChatWidget--expanded
+  .ais-ChatMessage:first-child:has(.sw-ChatWidget-productContext)
+  .ais-ChatMessage-container,
+.sw-ChatWidget.ais-ChatOverlayLayout--maximized
+  .ais-ChatMessage:first-child:has(.sw-ChatWidget-productContext)
+  .ais-ChatMessage-container {
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.75rem;
+}
+
+.sw-ChatWidget--fullscreen
+  .ais-ChatMessage:first-child:has(.sw-ChatWidget-productContext)
+  .ais-ChatMessage-leading,
+.sw-ChatWidget--expanded
+  .ais-ChatMessage:first-child:has(.sw-ChatWidget-productContext)
+  .ais-ChatMessage-leading,
+.sw-ChatWidget.ais-ChatOverlayLayout--maximized
+  .ais-ChatMessage:first-child:has(.sw-ChatWidget-productContext)
+  .ais-ChatMessage-leading {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+.sw-ChatWidget
+  .ais-ChatMessage:not(:first-child)
+  .sw-ChatWidget-productContext {
+  display: none;
+}
+
+.sw-ChatWidget .ais-ChatMessage {
+  color: var(--foreground);
+}
+
+.sw-ChatWidget .ais-ChatMessage--neutral .ais-ChatMessage-message {
+  background: var(--muted);
+  border-radius: var(--radius-card-base, 0.75rem);
+}
+
+.sw-ChatWidget .ais-ChatMessage[data-role='user'] .ais-ChatMessage-message {
+  background: var(--primary);
+  color: var(--primary-foreground);
+  padding: 0.75rem;
+  border-radius: var(--radius-card-base, 0.75rem);
+}
+
+/* Image turns match the custom assistant: the image sits above, only the text is a bubble. */
+.sw-ChatWidget
+  .ais-ChatMessage[data-role='user']:has(.sw-ChatWidget-userImage)
+  .ais-ChatMessage-message {
+  align-items: flex-end;
+  gap: 0;
+  padding: 0;
+  background: none;
+  border-radius: 0;
+}
+
+/* Satellite's unlayered `.ais-ChatMessage-message img` would beat ChatImageMessage's `max-w-[12rem]`. */
+.sw-ChatWidget .sw-ChatWidget-userImage img {
+  max-width: 12rem;
+}
+
+.sw-ChatWidget .sw-ChatWidget-userImageText {
+  padding: 0.75rem;
+  color: var(--primary-foreground);
+  background: var(--primary);
+  border-radius: var(--radius-card-base, 0.75rem);
+}
+
+.sw-ChatWidget
+  .ais-ChatMessage[data-role='assistant']
+  .ais-ChatMessage-content {
+  background: var(--muted);
+  border-radius: var(--radius-card-base, 0.75rem);
+  overflow: hidden;
+  padding: 0.75rem 1rem;
+}
+
+.sw-ChatWidget
+  .ais-ChatMessage[data-role='assistant']
+  .ais-ChatMessage-message
+  :is(ol, ul):not(
+    .ais-Carousel-list,
+    .sw-ItineraryDays,
+    .sw-ItineraryActivities
+  ) {
+  list-style: revert;
+  margin-block: revert;
+  padding-inline-start: 1.5rem;
+}
+
+.sw-ChatWidget
+  .ais-ChatMessage[data-role='assistant']
+  .ais-ChatMessage-message
+  .ais-Carousel-item
+  :is(ol, ul) {
+  list-style: none;
+  margin-block: 0;
+  padding-inline-start: 0;
+}
+
+.sw-ChatWidget .ais-ChatMessage-message .ais-ChatToolGroupedResults-intro,
+.sw-ChatWidget .ais-ChatMessage-message .ais-ChatToolGroupedResults-groupTitle,
+.sw-ChatWidget
+  .ais-ChatMessage-message
+  .ais-ChatToolGroupedResultsCarouselHeaderCount {
+  color: var(--foreground);
+}
+
+.sw-ChatWidget .ais-ChatMessage-message .ais-ChatToolGroupedResults-groupTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.sw-ChatWidget .ais-ChatToolGroupedResults {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.sw-ChatWidget .ais-ChatToolGroupedResults-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sw-ChatWidget .ais-ChatMessage-message .ais-ChatToolGroupedResults-groupWhy {
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+
+.sw-ChatWidget .ais-ChatToolGroupedResults .ais-Carousel-list {
+  grid-auto-columns: max-content;
+  gap: 0.75rem;
+  margin-inline: 0;
+  padding-block: 0 0.5rem;
+  padding-inline: 0;
+  scroll-padding-inline: 0;
+  scrollbar-color: var(--muted-foreground) var(--border);
+  scrollbar-width: thin;
+}
+
+/* Both Agent Studio result tools use InstantSearch's grid carousel. Make the
+ * grid item a flex container so shared product cards can fill its height. */
+.sw-ChatWidget .ais-ChatMessage-message .ais-Carousel-list {
+  align-items: stretch;
+}
+
+.sw-ChatWidget
+  .ais-ChatToolGroupedResults
+  .ais-Carousel-list:has(.ais-Carousel-item:only-child) {
+  grid-auto-columns: max-content !important;
+}
+
+.sw-ChatWidget
+  .ais-ChatToolGroupedResults
+  .ais-Carousel-list::-webkit-scrollbar {
+  height: 4px;
+}
+
+.sw-ChatWidget
+  .ais-ChatToolGroupedResults
+  .ais-Carousel-list::-webkit-scrollbar-track {
+  background: var(--border);
+  margin-top: 0.5rem;
+}
+
+.sw-ChatWidget
+  .ais-ChatToolGroupedResults
+  .ais-Carousel-list::-webkit-scrollbar-thumb {
+  background: var(--muted-foreground);
+  border-radius: 999px;
+}
+
+.sw-ChatWidget .ais-ChatMessage-message .ais-Carousel-item {
+  display: flex;
+}
+
+.sw-ChatWidget .ais-ChatToolGroupedResults .ais-Carousel {
+  background: var(--muted);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: calc(var(--ais-spacing) * 0.5);
+}
+
+.sw-ChatWidget .ais-ChatToolGroupedResults .ais-Carousel::before,
+.sw-ChatWidget .ais-ChatToolGroupedResults .ais-Carousel::after {
+  display: none;
+}
+
+.sw-ChatWidget
+  .ais-ChatMessage-message
+  .ais-ChatToolGroupedResultsCarouselHeaderScrollButtons {
+  display: none;
+}
+
+.sw-ChatWidget
+  .ais-ChatMessage-message
+  .ais-ChatToolGroupedResultsCarouselHeader {
+  margin-bottom: 0;
+}
+
+.sw-ChatWidget
+  .ais-ChatMessage:has(.ais-ChatToolGroupedResults)
+  .ais-ChatMessage-content {
+  gap: 0.5rem;
+}
+
+/* The grouped-results intro is the response lead-in; a trailing text part can
+ * repeat it after the cards. Keep ordinary text answers unchanged. */
+.sw-ChatWidget
+  .ais-ChatMessage:has(.ais-ChatToolGroupedResults)
+  .ais-ChatMessage-message
+  > :is(span, .ais-ChatMessage-text) {
+  display: none;
+}
+
+.sw-ChatWidget .ais-ChatPromptSuggestions-suggestion {
+  border-radius: var(--radius-button-base);
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--card-foreground);
+}
+
+.sw-ChatWidget .ais-ChatPromptSuggestions-suggestion:hover:not(:disabled) {
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+
+/* The fallback search carousel has no group context, so its result count is
+ * noise. Keep its View all action as the escape hatch to the results page. */
+.sw-ChatWidget .ais-ChatToolSearchIndexCarouselHeaderCount,
+.sw-ChatWidget
+  .ais-ChatMessage-message
+  .ais-ChatToolSearchIndexCarouselHeaderScrollButtons {
+  display: none;
+}
+
+.sw-ChatWidget .ais-ChatPrompt-footer .ais-ChatPrompt-disclaimer,
+.sw-ChatWidget .ais-ChatMessage-actions,
+.sw-ChatWidget .ais-ChatMessage-action,
+.sw-ChatWidget .ais-ChatMessage-action svg,
+.sw-ChatWidget .ais-ChatMessage-feedbackSpinner svg,
+.sw-ChatWidget .ais-ChatMessage-feedbackCheck,
+.sw-ChatWidget .ais-ChatMessage-feedbackText {
+  color: var(--muted-foreground);
+}
+
+/* Matches MOBILE_BREAKPOINT and Tailwind's lg threshold. */
+@media (max-width: 1023px) {
+  .sw-ChatWidget--side-panel.ais-ChatOverlayLayout {
+    inset: 0;
+    width: 100%;
+    height: 100dvh;
+    max-width: none;
+    /* Match the custom assistant's mobile stacking level so the DemoBar
+     * cannot cover active chat controls. */
+    z-index: 10001;
+  }
+
+  .sw-ChatWidget--fullscreen .ais-ChatHeader,
+  .sw-ChatWidget--fullscreen .ais-ChatMessages-scroll,
+  .sw-ChatWidget--expanded .ais-ChatHeader,
+  .sw-ChatWidget--expanded .ais-ChatMessages-scroll,
+  .sw-ChatWidget.ais-ChatOverlayLayout--maximized .ais-ChatHeader,
+  .sw-ChatWidget.ais-ChatOverlayLayout--maximized .ais-ChatMessages-scroll {
+    padding-inline: 1rem !important;
+  }
+
+  .sw-ChatWidget--fullscreen,
+  .sw-ChatWidget--expanded,
+  .sw-ChatWidget.ais-ChatOverlayLayout--maximized {
+    --sw-chat-content-gutter: 1rem;
+  }
+
+  .sw-ChatWidget .ais-Chat-container {
+    border-left: 0;
+  }
+}
+
+/* ------------------------------------------------ */
+/* Hits Widget Overrides                            */
+/* ------------------------------------------------ */
+
+/* Override Hits css from Algolia */
+.ais-Hits-item {
+  background: none !important;
+  flex-direction: column !important;
+  align-items: stretch !important;
+  padding: 0 !important;
+  font-size: inherit !important;
+  font-weight: normal !important;
+  line-height: normal !important;
+  box-shadow: none !important;
+}
+
+/* ------------------------------------------------ */
+/* Highlight Widget Overrides                       */
+/* ------------------------------------------------ */
+
+/* Algolia Highlight component - use accent color with opacity */
+.ais-Highlight-highlighted,
+.ais-Snippet-highlighted {
+  background-color: var(--highlight) !important;
+  color: inherit !important;
+  font-style: normal !important;
+  font-weight: inherit !important;
+  padding: 0.1em 0.2em;
+  border-radius: 0.2em;
+}
+
+/* ------------------------------------------------ */
+/* RefinementList Widget Overrides                  */
+/* ------------------------------------------------ */
+
+/* Facet count - subtle style without border */
+.ais-RefinementList-count {
+  background: none !important;
+  border: none !important;
+  padding: 0 !important;
+  font-size: 0.75rem !important;
+  color: var(--color-muted-foreground) !important;
+  opacity: 0.6;
+}
+
+/* Facet label - normalize casing (lowercase + capitalize first letter) */
+.ais-RefinementList-labelText {
+  display: inline-block;
+  text-transform: lowercase;
+}
+
+.ais-RefinementList-labelText::first-letter {
+  text-transform: uppercase;
+}
+
+/* Utility class for normalize casing */
+.capitalize-first {
+  display: inline-block;
+  text-transform: lowercase;
+}
+
+.capitalize-first::first-letter {
+  text-transform: uppercase;
+}
+
+/* ------------------------------------------------ */
+/* View Transitions - Ecommerce Only                */
+/* ------------------------------------------------ */
+
+/* Exit animation (outgoing page) */
+::view-transition-old(.ecom-page-exit) {
+  animation: ecom-fade-out 150ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Enter animation (incoming page) */
+::view-transition-new(.ecom-page-enter) {
+  animation: ecom-fade-in 250ms cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes ecom-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes ecom-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ------------------------------------------------ */
+/* Clears the 'X' from Chrome                       */
+/* ------------------------------------------------ */
+input[type='search']::-webkit-search-decoration,
+input[type='search']::-webkit-search-cancel-button,
+input[type='search']::-webkit-search-results-button,
+input[type='search']::-webkit-search-results-decoration {
+  display: none;
+}
+
+/* InstantSearch comparison and AI overview */
+/* Keep long attribute labels from pushing products out of the docked panel. */
+.sw-ChatWidget--side-panel:not(.sw-ChatWidget--expanded)
+  :is(
+    .ais-ChatToolComparisonTable-criterion,
+    .ais-ChatToolComparisonTable-corner
+  ) {
+  width: 8rem;
+  min-width: 8rem;
+  max-width: 8rem;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.theme-fashion .sw-CompareToggle {
+  min-height: 1.625rem;
+  padding-inline: 0.375rem;
+  font-size: 0.6875rem;
+}
+
+.sw-ResultCard button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* The InstantSearch stylesheet already lays the card out as a flex column with
+ * a gap, so vertical spacing between its sections comes from `gap` alone.
+ * Don't add margins to the sections or the spacing doubles. */
+.ais-ResultCard.sw-ResultCard {
+  --ais-result-card-expanded-max-height: min(28rem, 60vh);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+  padding: 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card-base, 0.75rem);
+  background: var(--card);
+  color: var(--card-foreground);
+  box-shadow: 0 4px 18px rgb(0 0 0 / 0.05);
+}
+
+/* Keep live announcements available to screen readers without displaying them. */
+.sw-ChatWidget .ais-ChatMessages-status,
+.sw-ResultCard .ais-ResultCard-status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.sw-ResultCard .ais-ResultCard-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sw-ResultCard .ais-ResultCard-headerTitle {
+  display: inline-flex;
+  flex: 1;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9375rem;
+  font-weight: 700;
+}
+
+.sw-ResultCard .ais-ResultCard-headerTitle svg {
+  color: var(--accent);
+  width: 0.875rem;
+  height: 0.875rem;
+  max-width: 0.875rem;
+  max-height: 0.875rem;
+}
+
+.sw-ResultCard .ais-ResultCard-continueButton svg,
+.sw-ResultCard .ais-ResultCard-expandButton svg,
+.sw-ResultCard .ais-ResultCard-minimizeButton svg {
+  width: 1rem;
+  height: 1rem;
+  max-width: 1rem;
+  max-height: 1rem;
+  flex-shrink: 0;
+}
+
+.sw-ResultCard .ais-ResultCard-body {
+  max-height: 5rem;
+  overflow: hidden;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  transition: max-height 200ms ease;
+}
+
+.sw-ResultCard .ais-ResultCard-message {
+  color: var(--card-foreground);
+}
+
+.sw-ResultCard .ais-ResultCard-body--expanded {
+  max-height: var(--ais-result-card-expanded-max-height);
+  overflow-y: auto;
+}
+
+.sw-ResultCard .ais-ResultCard-body--clipped {
+  mask-image: linear-gradient(to bottom, black 65%, transparent);
+}
+
+.sw-ResultCard .ais-ResultCard-loader {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.sw-ResultCard .ais-ResultCard-loaderLine {
+  height: 0.75rem;
+  border-radius: 9999px;
+  background: var(--muted);
+  animation: sw-result-card-pulse 1.5s ease-in-out infinite;
+}
+
+.sw-ResultCard .ais-ResultCard-loaderLine:last-child {
+  width: 65%;
+}
+
+.sw-ResultCard .ais-ResultCard-continueButton,
+.sw-ResultCard .ais-ResultCard-expandButton,
+.sw-ResultCard .ais-ResultCard-minimizeButton,
+.sw-ResultCard .ais-ChatPromptSuggestions-suggestion {
+  border-radius: var(--radius-button-base, 0.5rem);
+  cursor: pointer;
+}
+
+.sw-CompareBar.ais-CompareBar {
+  border-color: var(--border);
+  border-radius: var(--radius-card-base, 0.75rem);
+  background: var(--card);
+  color: var(--card-foreground);
+}
+
+.sw-CompareBar .ais-CompareBar-title,
+.sw-CompareBar .ais-CompareBar-itemLabel {
+  color: var(--card-foreground);
+}
+
+.sw-CompareBar .ais-CompareBar-count,
+.sw-CompareBar .ais-CompareBar-hint,
+.sw-CompareBar .ais-CompareBar-itemRemove {
+  color: var(--muted-foreground);
+}
+
+.sw-CompareBar .ais-CompareBar-item {
+  border-color: var(--border);
+  background: var(--muted);
+}
+
+.sw-CompareBar .ais-CompareBar-clearButton,
+.sw-CompareBar .ais-CompareBar-compareButton {
+  min-height: 2rem;
+  padding: 0.4rem 0.75rem;
+  border-radius: var(--radius-button-base, 0.5rem);
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.sw-CompareBar .ais-CompareBar-clearButton.ais-Button--outline {
+  border-color: var(--border);
+  background: var(--card);
+  color: var(--card-foreground);
+}
+
+.sw-CompareBar
+  .ais-CompareBar-clearButton.ais-Button--outline:hover:not(:disabled) {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, var(--card));
+}
+
+.sw-CompareBar .ais-CompareBar-clearButton:focus-visible,
+.sw-CompareBar .ais-CompareBar-compareButton:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.sw-CompareBar .ais-CompareBar-compareButton.ais-Button--primary {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+
+.sw-CompareBar
+  .ais-CompareBar-compareButton.ais-Button--primary:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--accent) 85%, var(--foreground));
+}
+
+.sw-CompareBar .ais-CompareBar-compareButton.ais-Button--primary:disabled {
+  border-color: var(--muted);
+  background: var(--muted);
+  color: var(--muted-foreground);
+}
+
+.sw-ResultCard .ais-ResultCard-continueButton {
+  padding: 0.45rem 0.7rem;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--card-foreground);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.sw-ResultCard
+  .ais-ResultCard-continueButton.ais-Button--outline:hover:not(:disabled) {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, var(--card));
+}
+
+/* Like the continue button: neutral border at rest, accent border and tint on hover. */
+.sw-ResultCard
+  .ais-ResultCard-suggestions
+  .ais-ChatPromptSuggestions-suggestion:hover:not(:disabled) {
+  border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 8%, var(--card));
+}
+
+.sw-ResultCard .ais-ResultCard-minimizeButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  color: var(--muted-foreground);
+}
+
+.sw-ResultCard .ais-ResultCard-expandButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--foreground);
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.sw-ResultCard .ais-ResultCard-suggestions {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* Three classes so this beats the satellite theme's
+ * `.ais-ResultCard-suggestions .ais-ChatPromptSuggestions-suggestion`, which
+ * has the same two-class specificity and can load after this file. */
+.sw-ResultCard
+  .ais-ResultCard-suggestions
+  .ais-ChatPromptSuggestions-suggestion {
+  max-width: 100%;
+  padding: 0.45rem 0.8rem;
+  border: 1px solid var(--border);
+  color: var(--foreground);
+  font-size: 0.75rem;
+  text-align: left;
+}
+
+@keyframes sw-result-card-pulse {
+  50% {
+    opacity: 0.45;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sw-ResultCard .ais-ResultCard-body {
+    transition: none;
+  }
+  .sw-ResultCard .ais-ResultCard-loaderLine {
+    animation: none;
+  }
+}
+
+/* PDP prompt suggestions: full-width prompts and a matching loading skeleton. */
+.sw-ProductPromptSuggestions .ais-PromptSuggestions-suggestion {
+  width: 100%;
+  min-height: 2.875rem;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-button-base);
+  background: transparent;
+  color: var(--muted-foreground);
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  text-align: left;
+  justify-content: left;
+  cursor: pointer;
+  transition:
+    color 150ms ease,
+    background-color 150ms ease,
+    border-color 150ms ease;
+}
+
+/* Triple class specificity: satellite's later-loaded
+ * `.ais-PromptSuggestions-skeletonItem:nth-child(n)` width rules would
+ * otherwise tie with (and beat) a two-class selector. */
+.sw-ProductPromptSuggestions
+  .ais-PromptSuggestions-skeleton
+  .ais-PromptSuggestions-skeletonItem {
+  width: 100%;
+  /* Match the prompt minimum height; longer prompts can grow to fit. */
+  height: 2.875rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-button-base);
+  background: color-mix(in oklab, var(--muted) 30%, transparent);
+}
+
+.sw-ProductPromptSuggestions
+  .ais-PromptSuggestions-suggestion:hover:not(:disabled) {
+  border-color: var(--primary);
+  background: color-mix(in oklab, var(--primary) 5%, transparent);
+  color: var(--foreground);
+}

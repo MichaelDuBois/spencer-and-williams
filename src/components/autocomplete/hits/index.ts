@@ -1,0 +1,5 @@
+export { AISuggestionsHit } from '@/components/autocomplete/hits/AISuggestionsHit'
+export { ProductAutocompleteHit } from '@/components/autocomplete/hits/ProductAutocompleteHit'
+export type { ProductAutocompleteValues } from '@/components/autocomplete/hits/ProductAutocompleteHit'
+export { RecipeAutocompleteHit } from '@/components/autocomplete/hits/RecipeAutocompleteHit'
+export { SuggestionHit } from '@/components/autocomplete/hits/SuggestionHit'
